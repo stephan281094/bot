@@ -1,0 +1,6 @@
+# Bot
+
+Beep.
+
+## License
+MIT
