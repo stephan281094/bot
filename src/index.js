@@ -7,5 +7,5 @@ var bot = new SlackBot({
 })
 
 bot.on('start', function () {
-  bot.postMessagetToChannel('general', 'Hello world!')
+  bot.postMessageToChannel('general', 'Hello world!')
 })
