@@ -4,14 +4,10 @@ Beep.
 
 ## Install
 * Create a new bot: https://my.slack.com/services/new/bot
+* Replace the bot credentials in `.env` with the ones of your new bot
 * Run `npm install`
-* Create a `.env` file in the root of the project with the bot credentials:
-
-  ```js
-  export BOT_API_KEY=aaaa-01234567891-AaBbCcDdEeFfEeGgHhIiJjKk
-  export BOT_NAME=Awesome Bot
-  ```
 * Run `npm start`
+* Now whenever you type `heeey!` in Slack, the bot will reply with `hooo!`
 
 ## License
 MIT
