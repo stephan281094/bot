@@ -5,6 +5,8 @@ var bot = new SlackBot({
   name: process.env.BOT_NAME
 })
 
-bot.on('start', function () {
-  bot.postMessageToChannel('general', 'Hello world!')
+bot.on('message', function (data) {
+  if (data.text === 'heeey!') {
+    bot.postMessageToChannel('general', 'hoooo!')
+  }
 })
