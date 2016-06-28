@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/stephan281094/bot#readme",
   "dependencies": {
+    "env2": "^2.1.0",
     "slackbots": "^0.5.1"
   }
 }

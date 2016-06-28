@@ -1,4 +1,5 @@
 var SlackBot = require('slackbots')
+var env = require('env2')('.env')
 
 var bot = new SlackBot({
   token: process.env.BOT_API_KEY,
