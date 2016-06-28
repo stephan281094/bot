@@ -1,9 +1,8 @@
 var SlackBot = require('slackbots')
-var config = require('../config/app.js')
 
 var bot = new SlackBot({
-  token: config.slack.token,
-  name: 'My bot'
+  token: process.env.BOT_API_KEY,
+  name: process.env.BOT_NAME
 })
 
 bot.on('start', function () {
