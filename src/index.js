@@ -6,7 +6,12 @@ var bot = new SlackBot({
 })
 
 bot.on('message', function (data) {
-  if (data.text === 'heeey!') {
-    bot.postMessageToChannel('general', 'hoooo!')
+  switch (data.type) {
+    case 'message':
+      if (data.text === 'heeey!') {
+        bot.postMessage(data.channel, 'hooo!')
+      }
+
+      break
   }
 })
