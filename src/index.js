@@ -1,18 +1,15 @@
-var SlackBot = require('slackbots')
+var Botkit = require('botkit')
 require('env2')('.env')
 
-var bot = new SlackBot({
-  token: process.env.BOT_API_KEY,
-  name: process.env.BOT_NAME
-})
+var controller = Botkit.slackbot()
 
-bot.on('message', function (data) {
-  switch (data.type) {
-    case 'message':
-      if (data.text === 'heeey!') {
-        bot.postMessage(data.channel, 'hooo!')
-      }
+controller.spawn({
+  token: process.env.BOT_API_KEY
+}).startRTM()
 
-      break
+controller.hears(
+  'heeey!', ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) {
+    bot.reply(message, 'hooo!')
   }
-})
+)
