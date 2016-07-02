@@ -13,3 +13,18 @@ controller.hears(
     bot.reply(message, 'hooo!')
   }
 )
+
+controller.hears(
+  'calc(.*)', ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) {
+    var calculation = message.match[1]
+
+    if (calculation) {
+      // TODO: Sanitize calculation
+      var answer = eval(calculation)
+      bot.reply(message, 'The answer is ' + answer + '!')
+    } else {
+      bot.reply(message, 'Please provide a valid argument')
+    }
+  }
+)
