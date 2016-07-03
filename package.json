@@ -20,8 +20,7 @@
   },
   "homepage": "https://github.com/stephan281094/bot#readme",
   "dependencies": {
-    "botkit": "^0.2.2",
-    "env2": "^2.1.0"
+    "botkit": "^0.2.2"
   },
   "devDependencies": {
     "standard": "^7.1.2"
