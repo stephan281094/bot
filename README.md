@@ -1,6 +1,6 @@
 # Bot
 
-Beep.
+My attempt at writing a Slack bot. Just a learning project!
 
 ## Install
 * Create a new bot: https://my.slack.com/services/new/bot
