@@ -2,12 +2,18 @@
 
 My attempt at writing a Slack bot. Just a learning project!
 
-## Install
+## How to install
 * Create a new bot: https://my.slack.com/services/new/bot
-* Replace the bot credentials in `.env` with the ones of your new bot
+* Add `.npmrc` with the following:
+  ```shell
+  BOT_API_KEY = xoxb-your-api-key
+  ```
+
+## How to run
 * Run `npm install`
 * Run `npm start`
-* Now whenever you type `heeey!` in Slack, the bot will reply with `hooo!`
+* Your Slack bot is now listening for messages! Try typing:
+  > @[name-of-bot] heeey!
 
 ## License
 MIT
