@@ -14,8 +14,7 @@ controller.hears('heeey!', ['direct_message', 'direct_mention', 'mention'],
 
 controller.hears('calculate (.*)', ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) {;
-    var cal = message.match[1];
-    var calc = cal.split("");
-    var result = eval(calc.join(''));
+    var calc = message.match[1];
+    var result = eval(calc);
     bot.reply(message, result.toString());
   });
