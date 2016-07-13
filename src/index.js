@@ -2,7 +2,7 @@ var Botkit = require('botkit')
 var controller = Botkit.slackbot()
 
 controller.spawn({
-  token: process.env.npm_config_BOT_API_KEY
+  token: process.env.BOT_API_KEY || process.env.npm_config_BOT_API_KEY
 }).startRTM()
 
 controller.hears(
