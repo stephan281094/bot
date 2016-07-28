@@ -14,6 +14,7 @@ My attempt at writing a Slack bot. Just a learning project!
 * Run `npm install`
 * Run `npm start`
 * Your Slack bot is now listening for messages! Try typing:
+
   > @[name-of-bot] heeey!
 
 ## License
