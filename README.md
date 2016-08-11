@@ -16,5 +16,8 @@ My attempt at writing a Slack bot. Just a learning project!
 * Your Slack bot is now listening for messages! Try typing:
   > @[name-of-bot] heeey!
 
+## Functions
+* Calculations: Type 'calc(5 + 5)' and the bot will give you the correct answer!
+
 ## License
 MIT
