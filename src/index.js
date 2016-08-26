@@ -13,11 +13,17 @@ controller.hears('heeey!', ['direct_message', 'direct_mention', 'mention'],
 
 controller.hears('calc(.*)', ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) {
-    var calculation = message.match[1]
-    calculation = calculation.replace(/[^-\d/*+.]/g, '')
     try {
-      var answer = eval(calculation);
-      bot.reply(message, 'The answer is ' + answer + '!');
-    } catch (e) { bot.reply(message, 'I was unable to provide you with an answer, so here\'s a :banana: instead.') }
+      var calculation = message.match[1]
+      if (calculation) {
+        calculation = calculation.replace(/[^-\d/*+.]/g, '')
+        var answer = eval(calculation) // eslint-disable-line
+        bot.reply(message, 'The answer is ' + answer + '!')
+      } else {
+        bot.reply(message, 'Please provide a valid argument')
+      }
+    } catch (e) {
+      bot.reply(message, 'I was unable to provide you with an answer, so here\'s a :banana: instead.')
+    }
   }
 )
