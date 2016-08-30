@@ -29,3 +29,7 @@ controller.hears('calc(.*)', ['direct_message', 'direct_mention', 'mention'],
     }
   }
 )
+
+controller.hears('yo', ['ambient'], function (bot, message) {
+  bot.reply(message, 'yo')
+})
