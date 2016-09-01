@@ -68,9 +68,9 @@ controller.hears("weather (.*) (.*)", ["mention", "direct_mention", "direct_mess
       } else if(days[1].icon == 'chancesleet' || days[1].icon == 'chancesnow'){
         bot.reply(message, ':snow_cloud:');
       } else if(days[1].icon == 'chancetstorms' || days[1].icon == 'tstorm'){
-        bot.reply(message, ':snow_cloud:');
-      } else if(days[1].icon == 'snow') {
         bot.reply(message, ':thunder_cloud_and_rain:');
+      } else if(days[1].icon == 'snow') {
+        bot.reply(message, ':snowflake:');
       }
 		})
 	})
