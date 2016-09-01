@@ -55,25 +55,23 @@ controller.hears("weather (.*) (.*)", ["mention", "direct_mention", "direct_mess
 		response.on('end', function(){
 			var data = JSON.parse(body);
 			var days = data.forecast.simpleforecast.forecastday;
-			for(i = 0;i<days.length;i++){
-				bot.reply(message, days[i].date.weekday +
-				' high: ' + days[i].high.celsius +
-				' low: ' + days[i].low.celsius +
-				' condition: ' + days[i].conditions);
-        if(days[i].icon == 'clear'){
-          bot.reply(message, ':sunny:');
-        } else if(days[i].icon == 'partlycloudy' || days[i].icon == 'partlysunny'){
-          bot.reply(message, ':mostly_sunny:');
-        } else if(days[i].icon == 'chancerain'){
-          bot.reply(message, ':partly_sunny_rain:');
-        } else if(days[i].icon == 'chancesleet' || days[i].icon == 'chancesnow'){
-          bot.reply(message, ':snow_cloud:');
-        } else if(days[i].icon == 'chancetstorms' || days[i].icon == 'tstorm'){
-          bot.reply(message, ':snow_cloud:');
-        } else if(days[i].icon == 'snow') {
-          bot.reply(message, ':thunder_cloud_and_rain:');
-        }
-			}
+			bot.reply(message, days[1].date.weekday +
+			' high: ' + days[1].high.celsius +
+			' low: ' + days[1].low.celsius +
+			' condition: ' + days[1].conditions);
+      if(days[1].icon == 'clear'){
+        bot.reply(message, ':sunny:');
+      } else if(days[1].icon == 'partlycloudy' || days[1].icon == 'partlysunny'){
+        bot.reply(message, ':mostly_sunny:');
+      } else if(days[1].icon == 'chancerain'){
+        bot.reply(message, ':partly_sunny_rain:');
+      } else if(days[1].icon == 'chancesleet' || days[1].icon == 'chancesnow'){
+        bot.reply(message, ':snow_cloud:');
+      } else if(days[1].icon == 'chancetstorms' || days[1].icon == 'tstorm'){
+        bot.reply(message, ':snow_cloud:');
+      } else if(days[1].icon == 'snow') {
+        bot.reply(message, ':thunder_cloud_and_rain:');
+      }
 		})
 	})
 });
