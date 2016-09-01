@@ -1,7 +1,7 @@
 var Botkit = require('botkit')
 var controller = Botkit.slackbot()
 var http = require('http');
-var weatherkey = 'Your wunderground key'; //wunderground api key
+var weatherkey = process.env.npm_config_WEATHER_API_KEY; //wunderground api key
 
 controller.spawn({
   token: process.env.BOT_API_KEY || process.env.npm_config_BOT_API_KEY
