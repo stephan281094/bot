@@ -8,7 +8,7 @@ controller.spawn({
 }).startRTM()
 
 controller.hears('heeey!', ['direct_message', 'direct_mention', 'mention'], function (bot, message) {
-    bot.reply(message, 'hooo!')
+  bot.reply(message, 'hooo!')
 })
 
 controller.hears('calc(.*)', ['direct_message', 'direct_mention', 'mention'], function (bot, message) {
