@@ -32,7 +32,7 @@ controller.hears('yo', ['ambient'], function (bot, message) {
 
 controller.hears('weather (.*)', ['mention', 'direct_mention', 'direct_message'], function (bot, message) {
   var city = message.match[1] + '.json'
-  var state = process.env.WEATHER_DEFAULT_STATE || process.env.npm_config_WEATHER_DEFAULT_STATE || message.match[2] // state can also be a country but use states for the US!
+  var state = process.env.WEATHER_DEFAULT_STATE || process.env.npm_config_WEATHER_DEFAULT_STATE  // state can also be a country but use states for the US!
   var url = '/api/' + weatherkey + '/forecast/q/'
   url = url.concat(state + '/', city)
 
