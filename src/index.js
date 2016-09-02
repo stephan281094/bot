@@ -74,7 +74,7 @@ controller.hears('weather (.*)', ['mention', 'direct_mention', 'direct_message']
           bot.reply(message, ':snowflake:')
           break
         default:
-          bot.reply(message, 'I was\'nt able to find a emoij for the current weather :disappointed:, so here\'s a :banana: instead ')
+          bot.reply(message, 'I wasn\'t able to find a emoij for the current weather :disappointed:, so here\'s a :banana: instead ')
       }
     })
   })
