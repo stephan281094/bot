@@ -1,7 +1,7 @@
 var Botkit = require('botkit')
 var controller = Botkit.slackbot()
 var http = require('http')
-var weatherkey = process.env.WUNDERGROUND_API_KEY || process.env.npm_config_WEATHER_API_KEY
+var weatherkey = process.env.WUNDERGROUND_API_KEY || process.env.npm_config_WUNDERGROUND_API_KEY
 
 controller.spawn({
   token: process.env.BOT_API_KEY || process.env.npm_config_BOT_API_KEY
@@ -31,10 +31,11 @@ controller.hears('yo', ['ambient'], function (bot, message) {
 })
 
 controller.hears('weather (.*)', ['mention', 'direct_mention', 'direct_message'], function (bot, message) {
-  var city = message.match[1] + '.json'
-  var state = process.env.WEATHER_DEFAULT_STATE || process.env.npm_config_WEATHER_DEFAULT_STATE  // state can also be a country but use states for the US!
-  var url = '/api/' + weatherkey + '/forecast/q/'
-  url = url.concat(state + '/', city)
+  var defaultState = process.env.WUNDERGROUND_DEFAULT_STATE || process.env.npm_config_WUNDERGROUND_DEFAULT_STATE
+  var input = message.match[1].split(' ')
+  var city = input[0]
+  var state = input[1] || defaultState
+  var url = '/api/' + weatherkey + '/forecast/q/' + state + '/' + city + '.json'
 
   http.get({
     host: 'api.wunderground.com',
@@ -46,21 +47,24 @@ controller.hears('weather (.*)', ['mention', 'direct_mention', 'direct_message']
     })
     response.on('end', function () {
       var data = JSON.parse(body)
-      var days = data.forecast.simpleforecast.forecastday
-      bot.reply(message, days[1].date.weekday +
-      ' high: ' + days[1].high.celsius +
-      ' low: ' + days[1].low.celsius +
-      ' condition: ' + days[1].conditions)
-      switch (days[1].icon) {
+      var today = data.forecast.simpleforecast.forecastday[0]
+
+      bot.reply(message, today.date.weekday +
+      ' high: ' + today.high.celsius +
+      ' low: ' + today.low.celsius +
+      ' condition: ' + today.conditions)
+      switch (today.icon) {
         case 'clear':
-          bot.reply(message, ':mostly_sunny:')
-          break
         case 'partlycloudy':
         case 'partlysunny':
           bot.reply(message, ':mostly_sunny:')
           break
         case 'chancerain':
           bot.reply(message, ':partly_sunny_rain:')
+          break
+        case 'mostlycloudy':
+        case 'cloudy':
+          bot.reply(message, ':cloud:')
           break
         case 'chancesleet':
         case 'chancesnow':
@@ -74,7 +78,7 @@ controller.hears('weather (.*)', ['mention', 'direct_mention', 'direct_message']
           bot.reply(message, ':snowflake:')
           break
         default:
-          bot.reply(message, 'I wasn\'t able to find a emoij for the current weather :disappointed:, so here\'s a :banana: instead ')
+          bot.reply(message, 'I wasn\'t able to find an emoij for the current weather :disappointed:, so here\'s a :banana: instead')
       }
     })
   })

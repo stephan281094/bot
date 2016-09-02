@@ -8,8 +8,8 @@ My attempt at writing a Slack bot. Just a learning project!
 
   ```shell
   BOT_API_KEY = xoxb-your-api-key
-  WEATHER_API-KEY = Your Wunderground Api key
-  WEATHER_DEFAULT_STATE = default state or country
+  WUNDERGROUND_API_KEY = your-api-key
+  WUNDERGROUND_DEFAULT_STATE = default state or country (e.g. 'NL')
   ```
 
 ## How to run
@@ -21,7 +21,7 @@ My attempt at writing a Slack bot. Just a learning project!
 
 ## Functions
 * Calculations: Type 'calc(5 + 5)' and the bot will give you the correct answer!
-* Weather forecast: Type 'Weather "City"' and get the forecast of that "City" for the current day in the state or country you set as default! 
+* Weather forecast: Type 'Weather "City"' and get the forecast of that "City" for the current day in the state or country you set as default!
 
 ## License
 MIT
