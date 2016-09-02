@@ -31,8 +31,10 @@ controller.hears('yo', ['ambient'], function (bot, message) {
 })
 
 controller.hears('weather (.*)', ['mention', 'direct_mention', 'direct_message'], function (bot, message) {
-  var city = message.match[1]
-  var state = process.env.WUNDERGROUND_DEFAULT_STATE || process.env.npm_config_WUNDERGROUND_DEFAULT_STATE
+  var defaultState = process.env.WUNDERGROUND_DEFAULT_STATE || process.env.npm_config_WUNDERGROUND_DEFAULT_STATE
+  var input = message.match[1].split(' ')
+  var city = input[0]
+  var state = input[1] || defaultState
   var url = '/api/' + weatherkey + '/forecast/q/' + state + '/' + city + '.json'
 
   http.get({
