@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/stephan281094/bot#readme",
   "dependencies": {
-    "botkit": "^0.2.2"
+    "axios": "^0.15.3",
+    "botkit": "^0.2.2",
+    "dotenv": "^4.0.0",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "pre-commit": "^1.1.3",

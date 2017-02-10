@@ -1,35 +1,55 @@
-var Botkit = require('botkit')
-var controller = Botkit.slackbot()
+require('dotenv').config()
+const Botkit = require('botkit')
+const ns = require('./api/ns')
 
-controller.spawn({
-  token: process.env.BOT_API_KEY || process.env.npm_config_BOT_API_KEY
-}).startRTM()
+const controller = Botkit.slackbot()
+const ambience = ['direct_message', 'direct_mention', 'mention']
 
-controller.hears('heeey!', ['direct_message', 'direct_mention', 'mention'],
-  function (bot, message) {
-    bot.reply(message, 'hooo!')
-  }
-)
+// Initialize the bot
+controller.spawn({ token: process.env.SLACK_API_KEY }).startRTM()
 
-controller.hears('calc(.*)', ['direct_message', 'direct_mention', 'mention'],
-  function (bot, message) {
-    try {
-      var calculation = message.match[1]
-
-      if (calculation) {
-        calculation = calculation.replace(/[^-\d/*+.]/g, '')
-
-        var answer = eval(calculation) // eslint-disable-line
-        bot.reply(message, 'The answer is ' + answer + '!')
-      } else {
-        bot.reply(message, 'Please provide a valid argument')
-      }
-    } catch (e) {
-      bot.reply(message, 'I was unable to provide you with an answer, so here\'s a :banana: instead.')
-    }
-  }
-)
-
-controller.hears('yo', ['ambient'], function (bot, message) {
-  bot.reply(message, 'yo')
+// Listen to 'heeey'
+controller.hears('heeey!', ambience, (bot, message) => {
+  bot.reply(message, 'hooo!')
 })
+
+// Fetch a list of departures by station
+controller.hears('TREIN (.*)', ambience, (bot, message) => {
+  bot.reply(message, ':train2: Fetching departures..')
+
+  const station = message.match[1]
+  if (!station) {
+    bot.reply(message, ':train2: Please supply a station.')
+    return
+  }
+
+  ns.getDepartures(station).then((departures) => {
+    if (!departures || !departures.length) {
+      bot.reply(message, 'No departures found.')
+      return
+    }
+
+    // Show a list of max 5 departures:
+    // 15:23 +2 min Amsterdam Centraal
+    departures.slice(0, 5).forEach((dep) => {
+      let msg =
+        `${getTime(dep.departure)} ` +
+        (dep.delayed ? `*${dep.delayed}* ` : '') +
+        `${dep.destination}`
+
+      bot.reply(message, msg)
+    })
+  })
+})
+
+function getTime (dateString) {
+  const d = new Date(dateString)
+  const hours = leftPad(d.getHours(), 2)
+  const minutes = leftPad(d.getMinutes(), 2)
+
+  return `${hours}:${minutes}`
+}
+
+function leftPad (num, pad) {
+  return num.toLocaleString(undefined, {minimumIntegerDigits: pad})
+}

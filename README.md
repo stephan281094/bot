@@ -1,24 +1,23 @@
 # Bot
 
-My attempt at writing a Slack bot. Just a learning project!
+My attempt at writing a Slack bot.
 
-## How to install
-* Create a new bot: https://my.slack.com/services/new/bot
-* Add `.npmrc` with the following:
+## Install
+* Create a new bot at https://my.slack.com/services/new/bot.
+* Request NS API access at https://www.ns.nl/ews-aanvraagformulier/?0.
+* Copy `.env.dist` to `.env` and enter your secrets.
+* Run `yarn` to install dependencies.
 
-  ```shell
-  BOT_API_KEY = xoxb-your-api-key
-  ```
-
-## How to run
-* Run `npm install`
-* Run `npm start`
+## Usage
+* Run `yarn start`.
 * Your Slack bot is now listening for messages! Try typing:
 
   > @[name-of-bot] heeey!
 
-## Functions
-* Calculations: Type 'calc(5 + 5)' and the bot will give you the correct answer!
+## Deploying
+* Install [now](https://zeit.co/now).
+* Run `now -E=.env`.
+* Done!
 
 ## License
 MIT
