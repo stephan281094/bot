@@ -16,7 +16,7 @@ My attempt at writing a Slack bot.
 
 ## Deploying
 * Install [now](https://zeit.co/now).
-* Run `now -E=.env`.
+* Run `now -E`.
 * Done!
 
 ## License
