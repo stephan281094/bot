@@ -14,16 +14,19 @@ controller.hears('heeey!', ambience, (bot, message) => {
 })
 
 // Fetch a list of departures by station
-controller.hears('TREIN (.*)', ambience, (bot, message) => {
+controller.hears('train departures (.*)', ambience, (bot, message) => {
   bot.reply(message, ':train2: Fetching departures..')
 
-  const station = message.match[1]
+  const args = message.match[1].split(' ')
+  const station = args[0]
+  const dest = args[1] || ''
+
   if (!station) {
     bot.reply(message, ':train2: Please supply a station.')
     return
   }
 
-  ns.getDepartures(station).then((departures) => {
+  ns.getDepartures(station, dest).then((departures) => {
     if (!departures || !departures.length) {
       bot.reply(message, 'No departures found.')
       return

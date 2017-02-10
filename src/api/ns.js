@@ -1,7 +1,7 @@
 const axios = require('axios')
 const { parseString } = require('xml2js')
 
-const getDepartures = function (station) {
+const getDepartures = function (station, dest = '') {
   return axios.get(`https://webservices.ns.nl/ns-api-avt?station=${station}`, {
     auth: {
       username: process.env.NS_USER,
@@ -15,11 +15,20 @@ const getDepartures = function (station) {
         if (result && result.ActueleVertrekTijden) {
           resolve(
             result.ActueleVertrekTijden.VertrekkendeTrein.map((train) => {
-              return {
-                destination: train.EindBestemming,
+              const departure = {
+                destination: train.EindBestemming[0],
                 departure: train.VertrekTijd,
                 delayed: train.VertrekVertragingTekst
               }
+
+              return departure
+            }).filter((departure) => {
+              if (dest.length) {
+                return departure.destination.toLowerCase()
+                  .indexOf(dest.toLowerCase()) !== -1
+              }
+
+              return true
             })
           )
         }
