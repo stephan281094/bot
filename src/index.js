@@ -46,13 +46,12 @@ controller.hears('train departures (.*)', ambience, (bot, message) => {
 })
 
 function getTime (dateString) {
-  const d = new Date(dateString)
-  const hours = leftPad(d.getHours(), 2)
-  const minutes = leftPad(d.getMinutes(), 2)
+  const formatter = new Intl.DateTimeFormat([], {
+    timeZone: 'Europe/Amsterdam',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
 
-  return `${hours}:${minutes}`
-}
-
-function leftPad (num, pad) {
-  return num.toLocaleString(undefined, {minimumIntegerDigits: pad})
+  return formatter.format(new Date(dateString))
 }
