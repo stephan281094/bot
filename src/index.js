@@ -1,7 +1,16 @@
 require('dotenv').config()
 const Botkit = require('botkit')
+const http = require('http')
 const ns = require('./api/ns')
 
+// Setup 'ping' server to keep the bot alive
+const server = http.createServer((req, res) => {
+  res.end('Beep')
+})
+
+server.listen(3000)
+
+// Bot code starts here
 const controller = Botkit.slackbot()
 const ambience = ['direct_message', 'direct_mention', 'mention']
 
